@@ -2,7 +2,6 @@ package Games.TresEnRaya;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,12 +23,15 @@ import java.awt.Component;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollBar;
 import java.awt.Font;
+import java.awt.event.*;
 
 public class Juego extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField_jug2;
+	private JTextField textField_jug1;
+	private int[][] tablero;
+	private int turno;
 
 	/**
 	 * Launch the application.
@@ -52,6 +54,10 @@ public class Juego extends JFrame {
 	 */
 	public Juego() {
 		
+		// Inicializamos las varibles
+		this.turno = 1;
+		this.tablero = new int[3][3];
+		
 		// Creamos el diseño de la ventana añadiendo todas las componentes
 		
 		setTitle("Tres en Raya");
@@ -63,67 +69,67 @@ public class Juego extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(2, 2, 400, 455);
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(3, 3, 0, 0));
+		JPanel panel_tablero = new JPanel();
+		panel_tablero.setBounds(2, 2, 400, 455);
+		contentPane.add(panel_tablero);
+		panel_tablero.setLayout(new GridLayout(3, 3, 0, 0));
 		
-		JButton btnNewButton = new JButton("X");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton);
+		JButton casilla_00 = new JButton("");
+		casilla_00.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_00);
 		
-		JButton btnNewButton_1 = new JButton("O");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_1);
+		JButton casilla_01 = new JButton("");
+		casilla_01.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_01);
 		
-		JButton btnNewButton_2 = new JButton("X");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_2);
+		JButton casilla_02 = new JButton("");
+		casilla_02.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_02);
 		
-		JButton btnNewButton_3 = new JButton("X");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_3);
+		JButton casilla_10 = new JButton("");
+		casilla_10.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_10);
 		
-		JButton btnNewButton_4 = new JButton("O");
-		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_4);
+		JButton casilla_11 = new JButton("");
+		casilla_11.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_11);
 		
-		JButton btnNewButton_5 = new JButton("O");
-		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_5);
+		JButton casilla_12 = new JButton("");
+		casilla_12.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_12);
 		
-		JButton btnNewButton_6 = new JButton("X");
-		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_6);
+		JButton casilla_20 = new JButton("");
+		casilla_20.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_20);
 		
-		JButton btnNewButton_7 = new JButton("O");
-		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_7);
+		JButton casilla_21 = new JButton("");
+		casilla_21.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_21);
 		
-		JButton btnNewButton_8 = new JButton("X");
-		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD, 25));
-		panel.add(btnNewButton_8);
+		JButton casilla_22 = new JButton("");
+		casilla_22.setFont(new Font("Tahoma", Font.BOLD, 25));
+		panel_tablero.add(casilla_22);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(410, 2, 400, 455);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panel_datos = new JPanel();
+		panel_datos.setBounds(410, 2, 400, 455);
+		contentPane.add(panel_datos);
+		panel_datos.setLayout(null);
 		
-		JButton btnNewButton_9 = new JButton("Nueva Partida");
-		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_9.setBounds(122, 10, 157, 27);
-		btnNewButton_9.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnNewButton_9.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel_1.add(btnNewButton_9);
+		JButton nueva_partida = new JButton("Nueva Partida");
+		nueva_partida.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		nueva_partida.setBounds(122, 10, 157, 27);
+		nueva_partida.setAlignmentY(Component.TOP_ALIGNMENT);
+		nueva_partida.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_datos.add(nueva_partida);
 		
-		JLabel lblNewLabel_6 = new JLabel("Turno del Jugador 1... ");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_6.setBounds(10, 41, 380, 33);
-		panel_1.add(lblNewLabel_6);
+		JLabel et_jugando = new JLabel("Turno del Jugador 1... ");
+		et_jugando.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		et_jugando.setBounds(10, 41, 380, 33);
+		panel_datos.add(et_jugando);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 74, 400, 166);
-		panel_1.add(panel_2);
+		JPanel panel_jug1 = new JPanel();
+		panel_jug1.setBounds(0, 74, 400, 166);
+		panel_datos.add(panel_jug1);
 		
 		JLabel lblNewLabel = new JLabel("Jugador 1 (X)");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -133,72 +139,86 @@ public class Juego extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(20, 37, 63, 29);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Humano");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnNewRadioButton.setBounds(62, 120, 75, 21);
+		JRadioButton hum_1 = new JRadioButton("Humano");
+		hum_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		hum_1.setBounds(62, 120, 75, 21);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("CPU");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnNewRadioButton_1.setBounds(139, 121, 50, 21);
-		panel_2.setLayout(null);
+		JRadioButton cpu_1 = new JRadioButton("CPU");
+		cpu_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cpu_1.setBounds(139, 121, 50, 21);
+		panel_jug1.setLayout(null);
 		
 		ButtonGroup bgroup = new ButtonGroup();
-		bgroup.add(rdbtnNewRadioButton);
-		bgroup.add(rdbtnNewRadioButton_1);
+		bgroup.add(hum_1);
+		bgroup.add(cpu_1);
 		
-		panel_2.add(lblNewLabel);
-		panel_2.add(lblNewLabel_1);
-		panel_2.add(rdbtnNewRadioButton);
-		panel_2.add(rdbtnNewRadioButton_1);
+		panel_jug1.add(lblNewLabel);
+		panel_jug1.add(lblNewLabel_1);
+		panel_jug1.add(hum_1);
+		panel_jug1.add(cpu_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("Tipo:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_5.setBounds(20, 114, 50, 32);
-		panel_2.add(lblNewLabel_5);
+		panel_jug1.add(lblNewLabel_5);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(81, 43, 96, 19);
-		panel_2.add(textField_2);
-		textField_2.setColumns(10);
+		textField_jug1 = new JTextField();
+		textField_jug1.setBounds(81, 43, 96, 19);
+		panel_jug1.add(textField_jug1);
+		textField_jug1.setColumns(10);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 250, 400, 205);
-		panel_1.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel panel_jug2 = new JPanel();
+		panel_jug2.setBounds(0, 250, 400, 205);
+		panel_datos.add(panel_jug2);
+		panel_jug2.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("Jugador 2 (O)");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setBounds(10, 10, 96, 32);
-		panel_3.add(lblNewLabel_2);
+		panel_jug2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Nombre:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(20, 37, 63, 29);
-		panel_3.add(lblNewLabel_3);
+		panel_jug2.add(lblNewLabel_3);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(81, 43, 96, 19);
-		panel_3.add(textField_1);
-		textField_1.setColumns(10);
+		textField_jug2 = new JTextField();
+		textField_jug2.setBounds(81, 43, 96, 19);
+		panel_jug2.add(textField_jug2);
+		textField_jug2.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Tipo:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(20, 114, 50, 32);
-		panel_3.add(lblNewLabel_4);
+		panel_jug2.add(lblNewLabel_4);
 		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Humano");
-		rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnNewRadioButton_2.setBounds(62, 120, 75, 21);
-		panel_3.add(rdbtnNewRadioButton_2);
+		JRadioButton humano_2 = new JRadioButton("Humano");
+		humano_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		humano_2.setBounds(62, 120, 75, 21);
+		panel_jug2.add(humano_2);
 		
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("CPU");
-		rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnNewRadioButton_3.setBounds(139, 121, 50, 21);
-		panel_3.add(rdbtnNewRadioButton_3);
+		JRadioButton cpu_2 = new JRadioButton("CPU");
+		cpu_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cpu_2.setBounds(139, 121, 50, 21);
+		panel_jug2.add(cpu_2);
 		
 		ButtonGroup bgroup_1 = new ButtonGroup();
-		bgroup_1.add(rdbtnNewRadioButton_2);
-		bgroup_1.add(rdbtnNewRadioButton_3);
-		
+		bgroup_1.add(cpu_2);
+		bgroup_1.add(humano_2);
 	}
+	
+	private boolean esGanador() {
+		for(int i=0;i<3;i++) {
+			if(tablero[i][0]==tablero[i][1] && tablero[i][0]==tablero[i][2] && tablero[i][0]!=0) {
+				return true;
+			}else if(tablero[0][i]==tablero[1][i] && tablero[0][i]==tablero[2][i] && tablero[i][0]!=0) {
+				return true;
+			}
+		}
+		if((tablero[0][0]==tablero[1][1] && tablero[0][0]==tablero[2][2] && tablero[0][0]!=0) || (tablero[0][2]==tablero[1][1] && tablero[0][2]==tablero[2][0] && tablero[0][2]!=0)){
+			return true;
+		}
+		return false;
+	}
+	
 }
