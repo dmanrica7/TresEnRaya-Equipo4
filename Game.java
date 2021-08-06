@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -23,6 +25,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 
 public class Game extends JFrame {
@@ -35,6 +38,11 @@ public class Game extends JFrame {
 	 ArrayList<String> dos = new ArrayList<String>();
 	 private JTextField textField;
 	 private JTextField textField_1;
+	 JRadioButton versusCPU;
+	 JRadioButton versusJ;
+	 JRadioButton versusCPU_1;
+	 JRadioButton versusJ_1;
+	 int cpu;
 
 	
 	public Game() {
@@ -49,11 +57,11 @@ public class Game extends JFrame {
 		
 		contentPane.setBackground(Color.white); 
 		
-		JRadioButton versusJ = new JRadioButton("JcJ", true);
+		 versusJ = new JRadioButton("JcJ", true);
 		versusJ.setBounds(505,253,125,50);
 		contentPane.add(versusJ);
 		
-		JRadioButton versusCPU = new JRadioButton("CPU", true);
+		 versusCPU = new JRadioButton("CPU", true);
 		versusCPU.setBounds(628,253,125,50);
 		contentPane.add(versusCPU);
 		
@@ -62,17 +70,17 @@ public class Game extends JFrame {
 		bgroup.add(versusCPU);
 		
 		
-		JRadioButton versusJ_1 = new JRadioButton("JcJ", true);
+		 versusJ_1 = new JRadioButton("JcJ", true);
 		versusJ_1.setBounds(505, 453, 125, 50);
 		contentPane.add(versusJ_1);
 		
-		JRadioButton versusCPU_1 = new JRadioButton("CPU", true);
+		 versusCPU_1 = new JRadioButton("CPU", true);
 		versusCPU_1.setBounds(628, 453, 125, 50);
 		contentPane.add(versusCPU_1);
 		
 		ButtonGroup bgroup2 = new ButtonGroup();
-		bgroup.add(versusJ_1);
-		bgroup.add(versusCPU_1);
+		bgroup2.add(versusJ_1);
+		bgroup2.add(versusCPU_1);
 		
 		
 		versusJ.setBackground(Color.white);
@@ -103,152 +111,173 @@ public class Game extends JFrame {
 		textField_1.setBounds(563, 427, 125, 23);
 		contentPane.add(textField_1);
 		
-		/*casillas*/
-		
-		
-		final JLabel c1 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c1.setBounds(50,200,100,100);
-		contentPane.add(c1);
-		c1.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =1;
-				turno =comprobaciones(c1, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-				
-				
-			}
-		});
-		
-		
-		final JLabel c2 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c2.setBounds(200,200,100,100);
-		contentPane.add(c2);
-		c2.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas=2;
-				turno=comprobaciones(c2, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-				
-			}
-		});
-		
-		final JLabel c3 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c3.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c3.setBounds(350,200, 100, 100);
-		contentPane.add(c3);
-		c3.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas=3;
-				turno=comprobaciones(c3, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-				
-			}
-		});
-		
-		final JLabel c4 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c4.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c4.setBounds(50,350,100,100);
-		contentPane.add(c4);
-		c4.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c4.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas=4;
-
-				turno=comprobaciones(c4, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-			}
-		});
-		
-		
-		final JLabel c5 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c5.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c5.setBounds(200,350,100,100);
-		contentPane.add(c5);
-		c5.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c5.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =5;
-				turno=comprobaciones(c5, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-			}
-		});
-		
-		final JLabel c6 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c6.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c6.setBounds(350,350,100,100);
-		contentPane.add(c6);
-		c6.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c6.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =6;
-				turno=comprobaciones(c6, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-			}
-		});
-		
-		final JLabel c7 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c7.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c7.setBounds(50,500,100,100);
-		contentPane.add(c7);
-		c7.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c7.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =7;
-				turno=comprobaciones(c7, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-			}
-		});
-		
-		final JLabel c8 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c8.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c8.setBounds(200,500,100,100);
-		contentPane.add(c8);
-		c8.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		c8.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =8;
-				turno=comprobaciones(c8, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
-			}
-		});
-		
-		final JLabel c9 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
-		c9.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		c9.setBounds(350,500,100,100);
-		contentPane.add(c9);
-		c9.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		JLabel lblJugador = new JLabel("Jugador 2");
 		lblJugador.setBounds(505, 375, 125, 38);
 		contentPane.add(lblJugador);
 		
+		JButton btnNewButton = new JButton("Comenzar");
+		btnNewButton.setBounds(563, 547, 125, 32);
+		contentPane.add(btnNewButton);
+		/*casillas*/
 		
-		
-		c9.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int cas =9;
-				turno=comprobaciones(c9, partida, turno, cas, uno, dos);
-				tresEnRaya(partida);
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent f) {
+				if(versusJ.isSelected()&&versusJ_1.isSelected()) {
+					cpu = 0;
+				}else if (versusJ.isSelected()&&versusCPU_1.isSelected()) {
+					cpu = 1;
+				}else if (versusCPU.isSelected()&&versusJ_1.isSelected()) {
+					cpu = 2;
+				}else if (versusCPU.isSelected()&&versusCPU_1.isSelected()) {
+					cpu = 3;
+				}
+				jugar(cpu);
 			}
 		});
-				
 		
+
 		}
 		
-		
+		public void jugar(final int cpu) {
+			
+			final JLabel c1 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c1.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c1.setBounds(50,200,100,100);
+			contentPane.add(c1);
+			c1.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c1.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =1;
+					turno =comprobaciones(c1, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+					
+					
+				}
+			});
+			
+			
+			final JLabel c2 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c2.setBounds(200,200,100,100);
+			contentPane.add(c2);
+			c2.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c2.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas=2;
+					turno=comprobaciones(c2, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+					
+				}
+			});
+			
+			final JLabel c3 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c3.setBounds(350,200, 100, 100);
+			contentPane.add(c3);
+			c3.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c3.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas=3;
+					turno=comprobaciones(c3, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+					
+				}
+			});
+			
+			final JLabel c4 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c4.setBounds(50,350,100,100);
+			contentPane.add(c4);
+			c4.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c4.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas=4;
+
+					turno=comprobaciones(c4, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+			
+			final JLabel c5 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c5.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c5.setBounds(200,350,100,100);
+			contentPane.add(c5);
+			c5.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c5.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =5;
+					turno=comprobaciones(c5, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+			final JLabel c6 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c6.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c6.setBounds(350,350,100,100);
+			contentPane.add(c6);
+			c6.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c6.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =6;
+					turno=comprobaciones(c6, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+			final JLabel c7 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c7.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c7.setBounds(50,500,100,100);
+			contentPane.add(c7);
+			c7.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c7.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =7;
+					turno=comprobaciones(c7, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+			final JLabel c8 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c8.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c8.setBounds(200,500,100,100);
+			contentPane.add(c8);
+			c8.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			c8.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =8;
+					turno=comprobaciones(c8, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+			final JLabel c9 = new JLabel("<html><div style='text-align: center;'>" + "" + "</div></html>", SwingConstants.CENTER);
+			c9.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			c9.setBounds(350,500,100,100);
+			contentPane.add(c9);
+			c9.setBorder(BorderFactory.createLineBorder(Color.black));
+			
+			
+			
+			c9.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int cas =9;
+					turno=comprobaciones(c9, partida, turno, cas, uno, dos, cpu);
+					tresEnRaya(partida);
+				}
+			});
+			
+		}
 		
 		
 		
@@ -300,26 +329,12 @@ public class Game extends JFrame {
 			JOptionPane.showMessageDialog(null, "Tres en raya del jugador 2");
 		}
 	}
-	public int comprobaciones(JLabel c, int []partida, int turno, int cas,ArrayList<String> uno, ArrayList<String> dos) {
-		JLabel turnoDe=new JLabel();
-		JOptionPane.showMessageDialog(null,"hola");
-		switch(turno) {
-		
-		case 1:
-			
-			turnoDe = new JLabel(textField.getText()+", es tu turno.");
-			 turnoDe.setBounds(505,120,150,50);
-			contentPane.add(turnoDe);
-			break;
-		case 2: 
-			turnoDe = new JLabel(textField_1.getText()+", es tu turno.");
-			turnoDe.setBounds(505,120,150,50);
-			contentPane.add(turnoDe);
-			break;
-			
-		}
-		
-		if(turno==1) {
+	
+	public int comprobaciones(JLabel c, int []partida, int turno, int cas,ArrayList<String> uno, ArrayList<String> dos, int cpu) {
+	
+		switch(cpu) {
+		case 0:
+			if(turno==1) {
 			
 			 if(partida[cas-1]==0&&uno.size()<3) {
 				 
@@ -349,7 +364,45 @@ public class Game extends JFrame {
 			 
 
 		}
-		return turno;
-		
+		break;
+		case 1:
+			if(turno==1) {
+				
+				 if(partida[cas-1]==0&&uno.size()<3) {
+					 
+				c.setText("X");
+				partida[cas-1]=1;
+				uno.add("x");
+				return turno=2;
+				
+				 }else {
+					 c.setText("");
+				 partida[cas-1]=0;
+				 uno.remove(1);
+				 }
+				 
+			}
+			else if(turno==2) {
+				 if(partida[cas-1]==0&&dos.size()<3) {
+						c.setText("O");
+						partida[cas-1]=2;
+						dos.add("o");
+						return turno=1;
+				 }else {
+					 c.setText("");
+					 partida[cas-1]=0;
+					 dos.remove(1);
+				 }
+				 
+
+			}
+			break;
+		case 2:
+			break;
+		case 3: 
+			break;
+			
+			default: return turno;
+		}
 	}
 }
